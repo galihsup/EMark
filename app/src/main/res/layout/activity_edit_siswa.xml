@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    tools:context="com.skripsi.user.etm.pagehome.EditSiswaActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#d5d3d3">
+
+        <RelativeLayout
+            android:id="@+id/rl_tool"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_edit_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="20dp"
+                android:src="@drawable/ic_exit" />
+
+            <TextView
+                android:id="@+id/tvjudul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_edit_exit"
+                android:text="Edit Siswa"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/iv_edit_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tvjudul"
+                android:paddingLeft="90dp"
+                android:src="@drawable/ic_save" />
+
+
+            <ImageView
+                android:id="@+id/iv_setting_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/iv_save"
+                android:src="@drawable/ic_more_grey" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#d5d3d3"
+        android:gravity="center"
+        android:padding="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/edprofile_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_g"
+            app:civ_border_color="@color/colorGrey"
+            app:civ_border_width="8dp"
+            app:civ_circle_background_color="@color/colorDarkBlue" />
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/edperson"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person_grey" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/edperson"
+                    android:background="@android:color/transparent"
+                    android:hint="Nama Lengkap"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#9c9c9c" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/edphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_phone_grey" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/edphone"
+                    android:background="@android:color/transparent"
+                    android:hint="Nomer Handphone"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#9c9c9c" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/edemail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_mail_grey" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/edemail"
+                    android:background="@android:color/transparent"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#9c9c9c" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/edalamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_add_location_grey" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editalamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/edalamat"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:hint="Alamat Rumah"
+                    android:inputType="textMultiLine"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#9c9c9c" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/edkode_pos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_dialpad_grey" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editkodepos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/edkode_pos"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:hint="Kode Pos"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#9c9c9c" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_more_edfields"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:text="More Fields"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_more_edfields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ed_asal_sekolah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_school_grey" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editasalsekolah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toEndOf="@+id/ed_asal_sekolah"
+                    android:layout_toRightOf="@+id/ed_asal_sekolah"
+                    android:hint="Asal Sekolah SMA/SMK/MA"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_edjurusan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ed_jurusan_sekolah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person_add" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editjurusansekolah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/ed_jurusan_sekolah"
+                    android:hint="Jurusan Sekolah"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_edkelas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ed_kelas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person_add" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editkelas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/ed_kelas"
+                    android:hint="Kelas"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_pilih_edjurusan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ed_pilih_jurusan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person_add" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editpilih_jurusan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/ed_pilih_jurusan"
+                    android:hint="Jurusan Yang Diinginkan"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_pilih_edptn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ed_pilih_ptn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person_add" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editpilih_ptn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/ed_pilih_ptn"
+                    android:hint="PTN Yang Diinginkan"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_pilih_edpts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/ed_pilih_pts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person_add" />
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tv_add_editpilih_pts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toRightOf="@+id/ed_pilih_pts"
+                    android:hint="PTS Yang Diinginkan"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/vw_ed_more"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#9c9c9c"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/rl_find_edtrilogi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_kenal_trilogi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:text="@string/kenal_trilogi" />
+
+                <RadioGroup
+                    android:id="@+id/radio_cek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_kenal_trilogi"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rd_editya"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="Ya"
+                        android:textSize="15sp" />
+
+                    <RadioButton
+                        android:id="@+id/rd_edittidak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/rd_ya"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="Tidak"
+                        android:textSize="15sp" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_setuju"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/radio_cek"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:text="@string/jika_setuju" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_ed_mengetahui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/ed_pilih_isian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:text="@string/pilih_kenal_trilogi"
+                    android:textSize="15sp" />
+
+                <CheckBox
+                    android:id="@+id/ed_pameran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_pilih_isian"
+                    android:layout_marginLeft="15dp"
+                    android:text="Pameran Pendidikann" />
+
+                <CheckBox
+                    android:id="@+id/ed_guru"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_pilih_isian"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/ed_pameran"
+                    android:text="Guru" />
+
+                <CheckBox
+                    android:id="@+id/ed_orangtua"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_pilih_isian"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/ed_guru"
+                    android:text="Orang Tua" />
+
+                <CheckBox
+                    android:id="@+id/ed_edufair"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_pameran"
+                    android:layout_marginLeft="15dp"
+                    android:text="Edufair di sekolah" />
+
+                <CheckBox
+                    android:id="@+id/ed_teman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_pameran"
+                    android:layout_marginLeft="33dp"
+                    android:layout_toRightOf="@+id/ed_edufair"
+                    android:text="Teman" />
+
+                <CheckBox
+                    android:id="@+id/ed_majalah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_pameran"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/ed_teman"
+                    android:text="Majalah" />
+
+                <CheckBox
+                    android:id="@+id/ed_presentasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_edufair"
+                    android:layout_marginLeft="15dp"
+                    android:text="Presentasi di sekolah" />
+
+                <CheckBox
+                    android:id="@+id/ed_sms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_edufair"
+                    android:layout_marginLeft="11dp"
+                    android:layout_toRightOf="@+id/ed_presentasi"
+                    android:text="SMS" />
+
+                <CheckBox
+                    android:id="@+id/ed_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_edufair"
+                    android:layout_marginLeft="22dp"
+                    android:layout_toRightOf="@+id/ed_sms"
+                    android:text="Radio" />
+
+                <CheckBox
+                    android:id="@+id/ed_sosmed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_presentasi"
+                    android:layout_marginLeft="15dp"
+                    android:text="Facebook/Twitter" />
+
+                <CheckBox
+                    android:id="@+id/ed_poster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_presentasi"
+                    android:layout_marginLeft="35dp"
+                    android:layout_toRightOf="@+id/ed_sosmed"
+                    android:text="Poster" />
+
+                <CheckBox
+                    android:id="@+id/ed_saudara"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_presentasi"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/ed_poster"
+                    android:text="Saudara" />
+
+                <CheckBox
+                    android:id="@+id/ed_website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_sosmed"
+                    android:layout_marginLeft="15dp"
+                    android:text="Website Trilogi" />
+
+                <CheckBox
+                    android:id="@+id/ed_surat_kabar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_sosmed"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/ed_website"
+                    android:text="Surat Kabar" />
+
+                <CheckBox
+                    android:id="@+id/ed_lain_lain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ed_sosmed"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/ed_surat_kabar"
+                    android:text="Lainya" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

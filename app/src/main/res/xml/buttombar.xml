@@ -1,0 +1,47 @@
+<Tab>
+    <!-- Ini tab untuk home (menu siswa) -->
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home"
+        activeColor="@color/colorPrimary"
+        titleSize = "6dp"
+        title = "Home"
+        />
+
+    <!-- Ini tab untuk sms (menu sms marketing) -->
+    <tab
+        id="@+id/tab_sms"
+        icon="@drawable/ic_sms"
+        activeColor="@color/colorPrimary"
+        titleSize = "6dp"
+        title = "SMS"
+        />
+
+    <!-- Ini tab untuk telemarketing (menu telemarketing) -->
+    <tab
+        id="@+id/tab_telemart"
+        icon="@drawable/ic_phone"
+        activeColor="@color/colorPrimary"
+        titleSize = "6dp"
+        title = "Telepon"
+        />
+
+    <!-- Ini tab untuk email (menu email marketing) -->
+    <tab
+        id="@+id/tab_email"
+        icon="@drawable/ic_email_white"
+        activeColor="@color/colorPrimary"
+        titleSize = "6dp"
+        title = "Email"
+        />
+
+    <!-- Ini tab untuk logout -->
+    <tab
+        id="@+id/tab_logout"
+        icon="@drawable/ic_logout"
+        activeColor="@color/colorPrimary"
+        titleSize = "6dp"
+        title = "Logout"
+        />
+
+</Tab>

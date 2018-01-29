@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ETM</string>
+    <string name="text_kontak">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="kebijakan"><u>Kebijakan Privasi</u></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_coba">CobaActivity</string>
+    <string name="setting">Setting</string>
+    <string name="add">Tambah</string>
+    <string name="kenal_trilogi">Sebelumnya pernah mengetahui Universitas Trilogi?</string>
+    <string name="jika_setuju">*Jika ya silahkan isi pertanyaan dibawah ini</string>
+    <string name="pilih_kenal_trilogi">Mengetahui Universitas Trilogi dari?</string>
+    <string name="title_activity_mapping_siswa">Mapping Siswa</string>
+</resources>
