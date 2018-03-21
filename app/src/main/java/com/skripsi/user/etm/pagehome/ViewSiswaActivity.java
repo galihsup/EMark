@@ -3,6 +3,7 @@ package com.skripsi.user.etm.pagehome;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -19,8 +20,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.skripsi.user.etm.AppsController;
 import com.skripsi.user.etm.R;
 import com.skripsi.user.etm.util.Constant;
@@ -35,9 +34,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewSiswaActivity extends AppCompatActivity {
 
-    ImageView ivKeluar;
+    ImageView ivKeluar,ivTlp, ivSms;
     FloatingActionButton fab;
-    String id_siswa;
+    String id_siswa, jenis_kegiatan;
     ProgressDialog loading;
     CircleImageView civProfile;
     TextView tvNamaSiswa;
@@ -56,6 +55,9 @@ public class ViewSiswaActivity extends AppCompatActivity {
         tieAsal = (TextInputEditText) findViewById(R.id.tv_view_add_asalsekolah);
         tieJurusan = (TextInputEditText) findViewById(R.id.tv_view_add_jurusansekolah);
         tieKelas = (TextInputEditText) findViewById(R.id.tv_view_add_kelas);
+        ivTlp = (ImageView) findViewById(R.id.gambar_phone);
+        ivSms = (ImageView) findViewById(R.id.gambar_msg);
+
         ivKeluar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,14 +67,63 @@ public class ViewSiswaActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id_siswa = intent.getStringExtra("id_siswa");
+        jenis_kegiatan = intent.getStringExtra("jenis_kegiatan");
         Log.d("ids", id_siswa);
         getViewSiswa(id_siswa);
+
+        ivTlp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(jenis_kegiatan.equals("Telemarketing") || jenis_kegiatan.equals("Siswa")) {
+                    String phone = "089524786527";
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                    startActivity(intent);
+                } else {
+
+                }
+            }
+        });
+
+        ivSms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(jenis_kegiatan.equals("SmsMarketing") || jenis_kegiatan.equals("Siswa")) {
+                    /** Creating an intent to initiate view action */
+                    Intent intent = new Intent("android.intent.action.VIEW");
+
+                    /** creates an sms uri */
+                    Uri data = Uri.parse("smsto:" + "089524786527");
+
+                    /** Setting sms uri to the intent */
+                    intent.setData(data);
+
+                    /** Initiates the SMS compose screen, because the activity contain ACTION_VIEW and sms uri */
+                    startActivity(intent);
+                } else {
+
+                }
+            }
+        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ViewSiswaActivity.this, EditSiswaActivity.class);
-                intent.putExtra("ids", id_siswa);
+                Intent intent = null;
+                if(jenis_kegiatan.equals("Siswa"))
+                {
+                    intent = new Intent(ViewSiswaActivity.this, EditSiswaActivity.class);
+                    intent.putExtra("ids", id_siswa);
+                } else if(jenis_kegiatan.equals("SmsMarketing")){
+                    intent = new Intent(ViewSiswaActivity.this, EditSmsSiswaActivity.class);
+                    intent.putExtra("ids", id_siswa);
+                }
+                else if(jenis_kegiatan.equals("Telemarketing")){
+                    intent = new Intent(ViewSiswaActivity.this, EditTeleSiswaActivity.class);
+                    intent.putExtra("ids", id_siswa);
+                } else if(jenis_kegiatan.equals("Emailmarketing")){
+                    intent = new Intent(ViewSiswaActivity.this, EditEmailSiswaActivity.class);
+                    intent.putExtra("ids", id_siswa);
+                }
                 startActivity(intent);
             }
         });
@@ -126,6 +177,7 @@ public class ViewSiswaActivity extends AppCompatActivity {
                         String nm = data.getString("etm_nama_siswa").toString();
                         String img = nm.substring(0,1);
                         img = img.toUpperCase();
+                        Log.e("gambarlo",img);
                         tieAlamat.setText(data.getString("etm_alamat_siswa").toString());
                         tieKelas.setText(data.getString("etm_kelas_siswa").toString());
                         tieJurusan.setText(data.getString("etm_jurusan_sekolah").toString());
@@ -144,136 +196,58 @@ public class ViewSiswaActivity extends AppCompatActivity {
     }
 
     public void isiPhoto(String img){
-        if(img == "A"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_a)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "B"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_b)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "C"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_c)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "D"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_d)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "E"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_e)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "F"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_f)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "G"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_g)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "H"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_h)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "I"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_i)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "J"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_j)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "K"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_k)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "L"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_l)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "M"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_m)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "N"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_n)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "O"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_o)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "P"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_p)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "Q"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_q)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "R"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_r)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "S"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_s)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "T"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_t)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "U"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_u)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "V"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_v)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "W"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_w)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "X"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_x)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "Y"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_y)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "Z"){
-            Glide.with(ViewSiswaActivity.this)
-                    .load(R.drawable.ic_z)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
+        if(img.equals("A")){
+            civProfile.setImageResource(R.drawable.ic_a);
+        } else if(img.equals("B")){
+            civProfile.setImageResource(R.drawable.ic_b);
+        } else if(img.equals("C")){
+            civProfile.setImageResource(R.drawable.ic_c);
+        } else if(img.equals("D")){
+            civProfile.setImageResource(R.drawable.ic_d);
+        } else if(img.equals("E")){
+            civProfile.setImageResource(R.drawable.ic_e);
+        } else if(img.equals("F")){
+            civProfile.setImageResource(R.drawable.ic_f);
+        } else if(img.equals("G")){
+            civProfile.setImageResource(R.drawable.ic_g);
+        } else if(img.equals("H")){
+            civProfile.setImageResource(R.drawable.ic_h);
+        } else if(img.equals("I")){
+            civProfile.setImageResource(R.drawable.ic_i);
+        } else if(img.equals("J")){
+            civProfile.setImageResource(R.drawable.ic_j);
+        } else if(img.equals("K")){
+            civProfile.setImageResource(R.drawable.ic_k);
+        } else if(img.equals("L")){
+            civProfile.setImageResource(R.drawable.ic_l);
+        } else if(img.equals("M")){
+            civProfile.setImageResource(R.drawable.ic_m);
+        } else if(img.equals("N")){
+            civProfile.setImageResource(R.drawable.ic_n);
+        } else if(img.equals("O")){
+            civProfile.setImageResource(R.drawable.ic_o);
+        } else if(img.equals("P")){
+            civProfile.setImageResource(R.drawable.ic_p);
+        } else if(img.equals("Q")){
+            civProfile.setImageResource(R.drawable.ic_q);
+        } else if(img.equals("R")){
+            civProfile.setImageResource(R.drawable.ic_r);
+        } else if(img.equals("S")){
+            civProfile.setImageResource(R.drawable.ic_s);
+        } else if(img.equals("T")){
+            civProfile.setImageResource(R.drawable.ic_t);
+        } else if(img.equals("U")){
+            civProfile.setImageResource(R.drawable.ic_u);
+        } else if(img.equals("V")){
+            civProfile.setImageResource(R.drawable.ic_v);
+        } else if(img.equals("W")){
+            civProfile.setImageResource(R.drawable.ic_w);
+        } else if(img.equals("X")){
+            civProfile.setImageResource(R.drawable.ic_x);
+        } else if(img.equals("Y")){
+            civProfile.setImageResource(R.drawable.ic_y);
+        } else if(img.equals("Z")){
+            civProfile.setImageResource(R.drawable.ic_z);
         }
     }
 }

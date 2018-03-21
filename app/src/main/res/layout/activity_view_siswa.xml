@@ -56,11 +56,12 @@
                 android:id="@+id/profile_image"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:layout_marginBottom="30dp"
                 android:src="@drawable/ic_g"
                 app:civ_border_color="@color/colorGrey"
                 app:civ_border_width="5dp"
-                app:civ_circle_background_color="@color/colorDarkBlue" />
+                app:civ_circle_background_color="@color/colorDarkBlue"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 
@@ -105,10 +106,10 @@
                 android:id="@+id/gambar_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@+id/gambar_phone"
-                android:src="@drawable/ic_message_blue" />
+                android:src="@drawable/ic_message_blue"
+                android:layout_alignTop="@+id/gambar_share"
+                android:layout_alignLeft="@+id/msg"
+                android:layout_alignStart="@+id/msg" />
 
             <TextView
                 android:id="@+id/msg"

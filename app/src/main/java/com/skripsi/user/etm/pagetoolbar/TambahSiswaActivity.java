@@ -2,6 +2,7 @@ package com.skripsi.user.etm.pagetoolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -24,10 +26,14 @@ import com.skripsi.user.etm.AppsController;
 import com.skripsi.user.etm.R;
 import com.skripsi.user.etm.pagehome.HomeActivity;
 import com.skripsi.user.etm.util.Constant;
+import com.skripsi.user.etm.util.VolleyMultipartRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -46,7 +52,7 @@ public class TambahSiswaActivity extends AppCompatActivity {
     RelativeLayout rlMengetahui;
     RelativeLayout rlPetugas;
     RelativeLayout rlTanggal;
-    ImageView ivExit,ivSave;
+    ImageView ivExit,ivSave,ivImport;
     View vwMore;
     RadioGroup rdCek;
     RadioButton rdYa;
@@ -80,6 +86,7 @@ public class TambahSiswaActivity extends AppCompatActivity {
         vwMore = (View) findViewById(R.id.vw_more);
         ivExit = (ImageView) findViewById(R.id.iv_exit);
         ivSave = (ImageView) findViewById(R.id.iv_save);
+        ivImport = (ImageView) findViewById(R.id.iv_import_siswa);
         rdCek = (RadioGroup) findViewById(R.id.radio_cek);
         rdYa = (RadioButton) findViewById(R.id.rd_ya);
         rdTidak = (RadioButton) findViewById(R.id.rd_tidak);
@@ -137,6 +144,13 @@ public class TambahSiswaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 deskripsi = ambil_cb();
                 simpanData();
+            }
+        });
+
+        ivImport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageBrowse();
             }
         });
 
@@ -346,5 +360,93 @@ public class TambahSiswaActivity extends AppCompatActivity {
                     rlTanggal.setVisibility(View.GONE);
                     break;
         }
+    }
+
+    private void imageBrowse() {
+//        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        // Start the Intent
+//        startActivityForResult(galleryIntent, 1);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        startActivityForResult(intent, 1);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            if(requestCode == 1){
+                Uri uri = data.getData();
+                InputStream iStream = null;
+                try {
+                    iStream = getContentResolver().openInputStream(uri);
+                    byte[] inputData = getBytes(iStream);
+                    uploadFile(inputData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
+    public byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
+
+    private void uploadFile(byte[] data) {
+        pd = new ProgressDialog(this);
+        pd.setMessage("Importing...");
+        pd.show();
+        final byte[] dataa = data;
+        String url = Constant.ENDPOINT_IMPORT_SISWA;
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, onUploadSuccess(), onUploadError()) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                // file name could found file base or direct access from real path
+                // for now just get bitmap data from ImageView
+                params.put("cobafile", new DataPart("dataaaa.xlsx", dataa, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+
+                return params;
+            }
+        };
+
+        AppsController.getInstance().addToRequestQueue(multipartRequest);
+    }
+
+    private Response.Listener<NetworkResponse> onUploadSuccess() {
+        pd.dismiss();
+        return new Response.Listener<NetworkResponse>() {
+            @Override
+            public void onResponse(NetworkResponse response) {
+                Log.d("upload success", response.toString());
+            }
+        };
+    }
+
+    private Response.ErrorListener onUploadError() {
+        pd.dismiss();
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("upload error", error.toString());
+            }
+        };
     }
 }

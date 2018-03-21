@@ -21,37 +21,26 @@
                 android:id="@+id/tv_judul_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EMAIL"
+                android:text="EMAIL MARKETING"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/iv_edit_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tv_judul_email"
-                android:paddingLeft="150dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_edit" />
-
-            <ImageView
                 android:id="@+id/iv_exp_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/iv_edit_email"
-                android:paddingLeft="10dp"
+                android:layout_toLeftOf="@+id/iv_ref_email"
                 android:paddingRight="30dp"
                 android:src="@drawable/ic_export" />
 
             <ImageView
-                android:id="@+id/iv_setting_email"
+                android:id="@+id/iv_ref_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/iv_edit_email"
-                android:paddingLeft="40dp"
-                android:src="@drawable/ic_more" />
+                android:paddingRight="20dp"
+                android:src="@drawable/ic_refresh" />
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
@@ -65,34 +54,42 @@
         android:padding="10dp">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/txt_email_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:hint="Search"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite"
-            android:id="@+id/txt_email_search"
             android:paddingLeft="5dp"
-            android:background="@android:color/transparent"/>
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite"/>
 
         <ImageView
             android:id="@+id/iv_cari_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_search"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:layout_marginEnd="16dp"
-            android:paddingLeft="5dp"/>
+            android:layout_marginRight="16dp"
+            android:paddingLeft="5dp"
+            android:src="@drawable/ic_search"/>
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:id="@+id/rv_siswa_email">
-    </android.support.v7.widget.RecyclerView>
+        android:text="Daftar Nama Siswa Email Marketing : "
+        android:textSize="15sp"
+        android:textStyle="bold"/>
+
+    <com.skripsi.user.etm.pagehome.FastScrollRecyclerView
+        android:id="@+id/rv_siswa_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+    </com.skripsi.user.etm.pagehome.FastScrollRecyclerView>
 
 </LinearLayout>

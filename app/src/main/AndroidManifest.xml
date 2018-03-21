@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".AppsController"
@@ -68,8 +69,28 @@
             android:name=".mainpage.MappingSiswaActivity"
             android:label="@string/title_activity_mapping_siswa"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".mainpage.ForgetPasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".mainpage.ForgetPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pagehome.EditTeleSiswaActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pagehome.SmsActivity"
+            android:label="@string/title_activity_sms"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UploadActivity" />
+        <activity
+            android:name=".pagehome.EditSmsSiswaActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pagehome.EditEmailSiswaActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".mainpage.DaftarActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".homesiswa.HomeSiswaActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

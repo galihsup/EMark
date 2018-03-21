@@ -21,8 +21,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.skripsi.user.etm.AppsController;
 import com.skripsi.user.etm.R;
 import com.skripsi.user.etm.util.Constant;
@@ -65,7 +63,6 @@ public class EditSiswaActivity extends AppCompatActivity {
             cbMajalah,cbRadio,cbSaudara,cbLainya;
 
     String deskripsi = "", ambilTanggal="";
-    public String inisial="";
     private SharedPreferences.Editor editor;
     SharedPreferences sharedPrefs;
 
@@ -219,6 +216,9 @@ public class EditSiswaActivity extends AppCompatActivity {
                         editor.putString(Constant.KEY_SHAREDPREFS_USER_DATA, json.getString("data"));
                         Log.d("json_object", String.valueOf(data));
                         etNama.setText(data.getString("etm_nama_siswa").toString());
+                        String nm = data.getString("etm_nama_siswa").toString();
+                        String img = nm.substring(0,1);
+                        img = img.toUpperCase();
                         etAlamat.setText(data.getString("etm_alamat_siswa").toString());
                         etKelas.setText(data.getString("etm_kelas_siswa").toString());
                         etJurusan.setText(data.getString("etm_jurusan_sekolah").toString());
@@ -232,6 +232,7 @@ public class EditSiswaActivity extends AppCompatActivity {
                         deskripsi = String.valueOf(data.getString("etm_deskripsi_trilogi").toString());
                         Log.e("kenal", deskripsi);
                         isiCB();
+                        isiPhoto(img);
                     } else {
                         Toast.makeText(EditSiswaActivity.this,msg,Toast.LENGTH_LONG).show();
                     }
@@ -284,141 +285,59 @@ public class EditSiswaActivity extends AppCompatActivity {
         }
     }
 
-    public void isiPhoto(){
-        inisial = etNama.getText().toString();
-        String nama = inisial;
-        String img = nama.substring(0,1);
-        img = img.toUpperCase();
-        if(img == "A"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_a)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "B"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_b)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "C"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_c)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "D"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_d)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "E"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_e)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "F"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_f)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "G"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_g)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "H"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_h)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "I"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_i)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "J"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_j)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "K"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_k)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "L"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_l)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "M"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_m)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "N"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_n)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "O"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_o)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "P"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_p)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "Q"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_q)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "R"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_r)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "S"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_s)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "T"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_t)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "U"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_u)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "V"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_v)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "W"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_w)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "X"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_x)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "Y"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_y)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
-        } else if(img == "Z"){
-            Glide.with(EditSiswaActivity.this)
-                    .load(R.drawable.ic_z)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .dontAnimate().into(civProfile);
+    public void isiPhoto(String img){
+        if(img.equals("A")){
+            civProfile.setImageResource(R.drawable.ic_a);
+        } else if(img.equals("B")){
+            civProfile.setImageResource(R.drawable.ic_b);
+        } else if(img.equals("C")){
+            civProfile.setImageResource(R.drawable.ic_c);
+        } else if(img.equals("D")){
+            civProfile.setImageResource(R.drawable.ic_d);
+        } else if(img.equals("E")){
+            civProfile.setImageResource(R.drawable.ic_e);
+        } else if(img.equals("F")){
+            civProfile.setImageResource(R.drawable.ic_f);
+        } else if(img.equals("G")){
+            civProfile.setImageResource(R.drawable.ic_g);
+        } else if(img.equals("H")){
+            civProfile.setImageResource(R.drawable.ic_h);
+        } else if(img.equals("I")){
+            civProfile.setImageResource(R.drawable.ic_i);
+        } else if(img.equals("J")){
+            civProfile.setImageResource(R.drawable.ic_j);
+        } else if(img.equals("K")){
+            civProfile.setImageResource(R.drawable.ic_k);
+        } else if(img.equals("L")){
+            civProfile.setImageResource(R.drawable.ic_l);
+        } else if(img.equals("M")){
+            civProfile.setImageResource(R.drawable.ic_m);
+        } else if(img.equals("N")){
+            civProfile.setImageResource(R.drawable.ic_n);
+        } else if(img.equals("O")){
+            civProfile.setImageResource(R.drawable.ic_o);
+        } else if(img.equals("P")){
+            civProfile.setImageResource(R.drawable.ic_p);
+        } else if(img.equals("Q")){
+            civProfile.setImageResource(R.drawable.ic_q);
+        } else if(img.equals("R")){
+            civProfile.setImageResource(R.drawable.ic_r);
+        } else if(img.equals("S")){
+            civProfile.setImageResource(R.drawable.ic_s);
+        } else if(img.equals("T")){
+            civProfile.setImageResource(R.drawable.ic_t);
+        } else if(img.equals("U")){
+            civProfile.setImageResource(R.drawable.ic_u);
+        } else if(img.equals("V")){
+            civProfile.setImageResource(R.drawable.ic_v);
+        } else if(img.equals("W")){
+            civProfile.setImageResource(R.drawable.ic_w);
+        } else if(img.equals("X")){
+            civProfile.setImageResource(R.drawable.ic_x);
+        } else if(img.equals("Y")){
+            civProfile.setImageResource(R.drawable.ic_y);
+        } else if(img.equals("Z")){
+            civProfile.setImageResource(R.drawable.ic_z);
         }
     }
 

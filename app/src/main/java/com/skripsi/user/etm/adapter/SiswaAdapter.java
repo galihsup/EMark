@@ -47,6 +47,7 @@ public class SiswaAdapter extends RecyclerView.Adapter<SiswaAdapter.ViewHolder> 
             public void onClick(View v) {
                 Intent intent = new Intent(SiswaAdapter.this.context, ViewSiswaActivity.class);
                 intent.putExtra("id_siswa", String.valueOf(data.getId()));
+                intent.putExtra("jenis_kegiatan", "Siswa");
                 Log.e("id_siswa", String.valueOf(data.getId()));
                 context.startActivity(intent);
             }

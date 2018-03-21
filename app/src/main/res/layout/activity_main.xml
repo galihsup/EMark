@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_button_blue"
-            android:text="LOGIN"
+            android:text="MASUK"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:textStyle="bold" />

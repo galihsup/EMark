@@ -58,7 +58,7 @@ public class DownloadSiswa extends AsyncTask<String, Integer, String> {
 //            output = new FileOutputStream("/sdcard/file_name.extension");
             output = new FileOutputStream(Environment
                     .getExternalStorageDirectory().toString()
-                    + "/2011.xlsx");
+                    + "/Download/Data_Siswa.xls");
             byte data[] = new byte[4096];
             long total = 0;
             int count;

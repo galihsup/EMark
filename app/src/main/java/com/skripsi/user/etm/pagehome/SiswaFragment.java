@@ -2,9 +2,9 @@ package com.skripsi.user.etm.pagehome;
 
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputEditText;
@@ -54,6 +54,7 @@ public class SiswaFragment extends Fragment {
     ImageView ivTambah;
     ImageView ivExport;
     ImageView ivSetting;
+    ImageView ivRefresh;
     Intent intent;
     TextInputEditText tieSearch;
     private SiswaAdapter siswaAdapter;
@@ -85,14 +86,10 @@ public class SiswaFragment extends Fragment {
         ivExport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getContext(),"coba coba",Toast.LENGTH_LONG).show();
-                DownloadSiswa downloadSiswa = new DownloadSiswa(SiswaFragment.this.getContext());
-                downloadSiswa.execute("https://omi.yippytech.com/downloads/FORM%20REGISTRASI%20BASKET.docx");
-                //downloadSiswa();
-//                String url = Constant.ENDPOINT_EXPORT_SISWA;
-//                Intent browse = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//
-//                getContext().startActivity(browse);
+                Intent viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse("https://emark.yippytech.com/etmweb/download_data_siswa.php"));
+                startActivity(viewIntent);
             }
         });
 
@@ -101,6 +98,7 @@ public class SiswaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getContext(),"coba coba",Toast.LENGTH_LONG).show();
+
             }
         });
 
@@ -141,6 +139,14 @@ public class SiswaFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        ivRefresh = (ImageView) view.findViewById(R.id.iv_siswa_ref);
+        ivRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSiswa();
             }
         });
 
@@ -215,7 +221,8 @@ public class SiswaFragment extends Fragment {
                         HashMap<String, Integer> mapIndex = calculateIndexesForName(siswaModels);
                         siswaAdapter = new SiswaAdapter(getContext(), siswaModels, mapIndex);
                         rvSearch.setAdapter(siswaAdapter);
-                        FastScrollRecyclerViewItemDecoration decoration = new FastScrollRecyclerViewItemDecoration(SiswaFragment.this.getContext());
+                        FastScrollRecyclerViewItemDecoration decoration =
+                                new FastScrollRecyclerViewItemDecoration(SiswaFragment.this.getContext());
                         rvSearch.addItemDecoration(decoration);
                         rvSearch.setItemAnimator(new DefaultItemAnimator());
                     } else {
@@ -243,82 +250,4 @@ public class SiswaFragment extends Fragment {
         }
         return mapIndex;
     }
-
-    public void downloadSiswa(){
-        String url = Constant.ENDPOINT_EXPORT_SISWA;
-        // declare the dialog as a member field of your activity
-        ProgressDialog mProgressDialog;
-
-        // instantiate it within the onCreate method
-        mProgressDialog = new ProgressDialog(getContext());
-        mProgressDialog.setMessage("File Download");
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setCancelable(true);
-
-        // execute this when the downloader must be fired
-        final DownloadSiswa downloadTask = new DownloadSiswa(getContext());
-        downloadTask.execute(url);
-
-        mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                downloadTask.cancel(true);
-            }
-        });
-
-//        loading = new ProgressDialog(getContext());
-//        loading.setMessage("Loading...");
-//        loading.show();
-//
-//        final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-//        final String token = sharedPrefs.getString(Constant.KEY_SHAREDPREFS_TOKEN, null);
-//        if (token != null) {
-//
-//            StringRequest req = new StringRequest(Request.Method.GET, url, listenSukses(), listenErr()) {
-//                @Override
-//                public Map<String, String> getHeaders() throws AuthFailureError {
-//                    Map<String, String> params = new HashMap<String, String>();
-//                    params.put("Authorization", "Bearer " + token);
-//                    return params;
-//                }
-//            };
-//            AppsController.getInstance().addToRequestQueue(req);
-//        }
-    }
-
-    private Response.ErrorListener listenErr() {
-        return new Response.ErrorListener() {
-            @Override
-            public  void onErrorResponse(VolleyError error) {
-                loading.dismiss();
-                Log.e("Error", "Gagal download data");
-                Log.e("Error", String.valueOf(error));
-                Toast.makeText(SiswaFragment.this.getContext(),error.toString(),Toast.LENGTH_LONG).show();
-            }
-        };
-    }
-
-    private Response.Listener<String> listenSukses() {
-        return new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                loading.dismiss();
-                try{
-                    Log.d("response", response);
-                    JSONObject json = new JSONObject(response);
-                    String message = json.getString("message");
-                    String status = json.getString("status");
-                    Log.d("message", message);
-                    if (status.equals("200"))
-                    {
-                        Toast.makeText(SiswaFragment.this.getContext(),message,Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-    }
-
 }

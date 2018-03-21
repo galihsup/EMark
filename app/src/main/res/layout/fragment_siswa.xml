@@ -30,8 +30,7 @@
                 android:id="@+id/iv_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/tvjudul"
-                android:paddingLeft="150dp"
+                android:layout_toLeftOf="@+id/iv_siswa_exp"
                 android:paddingRight="20dp"
                 android:src="@drawable/ic_person_add" />
 
@@ -39,18 +38,25 @@
                 android:id="@+id/iv_siswa_exp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/iv_add"
+                android:layout_toLeftOf="@+id/iv_siswa_ref"
                 android:paddingLeft="10dp"
                 android:paddingRight="30dp"
                 android:src="@drawable/ic_export" />
+
+            <ImageView
+                android:id="@+id/iv_siswa_ref"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/iv_siswa_setting"
+                android:paddingRight="30dp"
+                android:src="@drawable/ic_refresh" />
 
             <ImageView
                 android:id="@+id/iv_siswa_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/iv_add"
-                android:paddingLeft="40dp"
+                android:paddingRight="20dp"
                 android:src="@drawable/ic_more" />
         </RelativeLayout>
 
@@ -87,6 +93,13 @@
             android:src="@drawable/ic_search" />
 
     </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Daftar Nama Siswa : "
+        android:textSize="15sp"
+        android:textStyle="bold"/>
 
     <com.skripsi.user.etm.pagehome.FastScrollRecyclerView
         android:id="@+id/rv_siswa"

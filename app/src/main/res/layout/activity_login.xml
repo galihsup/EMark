@@ -4,32 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_splash"
     android:orientation="vertical"
     tools:context="com.skripsi.user.etm.mainpage.LoginActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_logo"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/rounded_white">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/ic_email_grey"
             android:drawablePadding="20dp"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="galihsup23@gmail.com"/>
+            android:text="ryanbaskara@gmail.com" />
 
     </RelativeLayout>
 
@@ -46,25 +53,25 @@
             android:id="@+id/et_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/ic_key"
             android:drawablePadding="20dp"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:padding="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="galih"/>
+            android:text="ryan"/>
 
         <ImageView
             android:id="@+id/iv_show_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-40dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/et_pass"
-            android:layout_marginRight="10dp"
             android:src="@drawable/ic_eye" />
 
     </RelativeLayout>
@@ -85,13 +92,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
-        <CheckBox
-            android:id="@+id/cek_remember"
+        <TextView
+            android:id="@+id/daftar_disini"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:paddingRight="100dp"
-            android:text="Remember Me"
-            android:textSize="15sp" />
+            android:text="Daftar disini ?"
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/tv_lupa"
@@ -100,7 +108,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/cek_remember"
+            android:layout_marginRight="10dp"
             android:text="Lupa Password?"
             android:textColor="@color/colorBlack" />
     </RelativeLayout>

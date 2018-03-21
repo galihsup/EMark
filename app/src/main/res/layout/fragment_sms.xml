@@ -1,8 +1,8 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.skripsi.user.etm.pagehome.SmsFragment">
 
@@ -21,28 +21,16 @@
                 android:id="@+id/tv_judul_sms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SMS "
+                android:text="SMS MARKETING"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/iv_edit_sms"
+                android:id="@+id/iv_exprt_sms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="150dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_edit"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/tv_judul_sms"
-                android:layout_toEndOf="@+id/tv_judul_sms" />
-
-            <ImageView
-                android:id="@+id/iv_exp_sms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/iv_edit_sms"
-                android:paddingLeft="10dp"
+                android:layout_toLeftOf="@+id/iv_refresh_sms"
                 android:paddingRight="30dp"
                 android:src="@drawable/ic_export" />
 
@@ -51,8 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_toRightOf="@+id/iv_edit_sms"
-                android:paddingLeft="40dp"
+                android:layout_marginRight="20dp"
                 android:src="@drawable/ic_refresh" />
         </RelativeLayout>
 
@@ -72,9 +59,12 @@
             android:hint="Search"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorWhite"
-            android:id="@+id/txt_sms_search"
+            android:id="@+id/txt_search_sms"
             android:paddingLeft="5dp"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <ImageView
             android:id="@+id/iv_cari_sms"
@@ -90,10 +80,18 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_jadwal_sms"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:text="Daftar Nama Siswa SMS Marketing : "
+        android:textSize="15sp"
+        android:textStyle="bold"/>
+
+    <com.skripsi.user.etm.pagehome.FastScrollRecyclerView
+        android:id="@+id/rv_siswa_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" />
 
 </LinearLayout>

@@ -35,8 +35,12 @@ public class HomeActivity extends AppCompatActivity {
             public void onTabSelected(@IdRes int tabId) {
                 if(tabId == R.id.tab_home){
                     commitFragment(new SiswaFragment());
-                } else if(tabId == R.id.tab_sms){
+                } else if(tabId == R.id.tab_jadwal) {
+                    commitFragment(new JadwalFragment());
+                }
+                else if(tabId == R.id.tab_sms){
                     commitFragment(new SmsFragment());
+                    //startActivity(new Intent(HomeActivity.this, SmsActivity.class));
                 } else if(tabId == R.id.tab_telemart){
                     commitFragment(new TelemarketingFragment());
                 } else if(tabId == R.id.tab_email){
@@ -44,7 +48,9 @@ public class HomeActivity extends AppCompatActivity {
                 } else if(tabId == R.id.tab_logout){
                     logout();
                     Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

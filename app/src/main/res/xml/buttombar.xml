@@ -8,6 +8,15 @@
         title = "Home"
         />
 
+    <!-- Ini tab untuk jadwal sms (menu jadwal sms marketing) -->
+    <tab
+        id="@+id/tab_jadwal"
+        icon="@drawable/ic_jadwal"
+        activeColor="@color/colorPrimary"
+        titleSize = "6dp"
+        title = "Jadwal"
+        />
+
     <!-- Ini tab untuk sms (menu sms marketing) -->
     <tab
         id="@+id/tab_sms"

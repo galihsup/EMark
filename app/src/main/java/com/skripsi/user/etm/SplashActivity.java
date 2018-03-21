@@ -26,14 +26,14 @@ public class SplashActivity extends AppCompatActivity {
 
         /**ambil data dari shared preference**/
         String getStatusLogin = sharedPrefs.getString(Constant.KEY_SHAREDPREFS_LOGIN_STATUS, null);
-        if(getStatusLogin != null){
+        if(getStatusLogin.equals("1")){
             statusLogin = "1";
             String getLocalData = sharedPrefs.getString(Constant.KEY_SHAREDPREFS_USER_DATA,null);
             if(getLocalData != null){
                 JSONObject json = null;
                 try{
                     json = new JSONObject(getLocalData);
-                    role = json.getString("ro_id_role");
+                    role = json.getString("id_role");
                 } catch (JSONException e){
 
                 }
@@ -44,16 +44,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run(){
                 try{
-
                     sleep(3000);
-                    if(statusLogin.equals("1") && role.equals("1")){
-                        intent = new Intent(SplashActivity.this, MainActivity.class);
-                    }
-                    else if(statusLogin.equals("1") && role.equals("2")){
-                        intent = new Intent(SplashActivity.this, MainActivity.class);
-                    } else {
-                        intent = new Intent(SplashActivity.this, MainActivity.class);
-                    }
+                    intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e){

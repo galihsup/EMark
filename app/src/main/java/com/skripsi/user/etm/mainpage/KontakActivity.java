@@ -1,7 +1,8 @@
 package com.skripsi.user.etm.mainpage;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -10,6 +11,7 @@ import com.skripsi.user.etm.R;
 public class KontakActivity extends AppCompatActivity {
 
     ImageView iv_kembali;
+    ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

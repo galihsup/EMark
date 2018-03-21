@@ -20,10 +20,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.gson.Gson;
-import com.skripsi.user.etm.R;
-import com.skripsi.user.etm.pagehome.HomeActivity;
 import com.skripsi.user.etm.AppsController;
+import com.skripsi.user.etm.R;
+import com.skripsi.user.etm.homesiswa.HomeSiswaActivity;
+import com.skripsi.user.etm.pagehome.HomeActivity;
 import com.skripsi.user.etm.util.Constant;
 
 import org.json.JSONException;
@@ -35,14 +35,14 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
+    public String statusLogin = "0";
     private TextInputEditText mUsername;
     private TextInputEditText mPasswordView;
-    private Gson gson;
     private SharedPreferences.Editor editor;
-    private String yourToken;
     ImageView iv_show_pass;
     private ProgressDialog pd;
     TextView tvLupa;
+    TextView tvDaftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         final SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         editor = sharedPrefs.edit();
-        gson = new Gson();
+        String getStatusLogin = sharedPrefs.getString(Constant.KEY_SHAREDPREFS_LOGIN_STATUS, null);
+        Log.d("sts_login",getStatusLogin);
+        if(getStatusLogin.equals("1")) {
+            statusLogin = "1";
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+        }
         String getUserData = sharedPrefs.getString(Constant.KEY_SHAREDPREFS_USER_DATA, null);
         String getToken = sharedPrefs.getString(Constant.KEY_SHAREDPREFS_TOKEN, null);
         if (getUserData != null && getToken !=null) {
@@ -58,8 +64,9 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 json = new JSONObject(getUserData);
                 String role = json.getString("role");
-                if (role.equals("2")) {
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                if (role.equals("1")) {
+                    Toast.makeText(this,"Hak akses anda ditolak", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(LoginActivity.this, LoginActivity.class));
                 } else {
                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 }
@@ -95,6 +102,14 @@ public class LoginActivity extends AppCompatActivity {
                 loginProses();
             }
         });
+
+        tvDaftar = (TextView) findViewById(R.id.daftar_disini);
+        tvDaftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, DaftarActivity.class));
+            }
+        });
     }
 
     private void loginProses(){
@@ -104,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         String url = Constant.ENDPOINT_LOGIN;
         final String username = mUsername.getText().toString();
         final String password = mPasswordView.getText().toString();
-        StringRequest req = new StringRequest(Request.Method.POST, url, loginListener(), errListener()){
+        StringRequest req = new StringRequest(Request.Method.POST, url, successListener(), errListener()){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -129,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-    private Response.Listener<String> loginListener() {
+    private Response.Listener<String> successListener() {
         return new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -140,25 +155,34 @@ public class LoginActivity extends AppCompatActivity {
                     String message = json.getString("message");
 
                     Log.d("message", message);
-                    Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show();
-
                     if (json.getString("status").equals("200")) {
                         JSONObject data = new JSONObject(json.getString("data"));
                         String role = data.getString("id_role");
 
-                        /** Store data in shared preference **/
-                        editor.putString(Constant.KEY_SHAREDPREFS_USER_DATA, json.getString("data"));
-                        editor.putString(Constant.KEY_SHAREDPREFS_LOGIN_STATUS, "1");
-                        editor.putString(Constant.KEY_SHAREDPREFS_TOKEN, json.getString("_token")); //buat ngambil json token
-                        editor.commit();
-
                         Intent intent;
                         if (role.equals("2")) {
+                            /** Store data in shared preference **/
+                            editor.putString(Constant.KEY_SHAREDPREFS_USER_DATA, json.getString("data"));
+                            editor.putString(Constant.KEY_SHAREDPREFS_LOGIN_STATUS, "1");
+                            editor.putString(Constant.KEY_SHAREDPREFS_TOKEN, json.getString("_token")); //buat ngambil json token
+                            editor.commit();
+                            Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show();
                             intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        } else if(role.equals("3")){
+                            /** Store data in shared preference **/
+                            editor.putString(Constant.KEY_SHAREDPREFS_USER_DATA, json.getString("data"));
+                            editor.putString(Constant.KEY_SHAREDPREFS_LOGIN_STATUS, "1");
+                            editor.putString(Constant.KEY_SHAREDPREFS_TOKEN, json.getString("_token")); //buat ngambil json token
+                            editor.commit();
+                            Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show();
+                            intent = new Intent(LoginActivity.this, HomeSiswaActivity.class);
+                            startActivity(intent);
                         } else {
-                            intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            Toast.makeText(LoginActivity.this,"Hak akses tidak sesuai",Toast.LENGTH_LONG).show();
                         }
-                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this,message,Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
